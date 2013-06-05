@@ -35,14 +35,14 @@ public class BatchRunner {
 
         @Override
         public void run() {
-            System.out.println("kjører");
             String[] split = line.split(" ");
             if(split[0].equals("ADD")){
                 counter.increment(Long.parseLong(split[1]));
-            } else if(split[1].equals("SUBTRACT")){
+            } else if(split[0].equals("SUBTRACT")){
                 counter.increment(Long.parseLong(split[1]));
+            }else if(split[0].equals("SQT")){
+                counter.sqrt();
             }
-            System.out.println(counter.get());
         }
     }
 }

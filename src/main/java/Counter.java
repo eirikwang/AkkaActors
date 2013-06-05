@@ -22,6 +22,14 @@ public class Counter {
             lock.unlock();
         }
     }
+    public void sqrt(){
+        lock.lock();
+        try {
+            count = (long) (Math.sqrt(count) * 2);
+        } finally {
+            lock.unlock();
+        }
+    }
     public long get(){
         return count;
     }
