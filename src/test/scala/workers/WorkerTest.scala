@@ -1,12 +1,12 @@
+package workers
+
 import akka.actor.ActorSystem
-import akka.actor.Status.Success
 import org.scalatest.matchers.MustMatchers
 import akka.util.Timeout
 import scala.concurrent.duration._
 import Worker._
 import akka.testkit.{TestKit, ImplicitSender, TestActorRef}
 import org.scalatest.{WordSpec, BeforeAndAfterAll}
-import akka.pattern.ask
 
 class WorkerTest extends TestKit(ActorSystem()) with ImplicitSender
 with WordSpec with MustMatchers with BeforeAndAfterAll {

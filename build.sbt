@@ -6,6 +6,8 @@ scalaVersion := "2.10.1"
 
 resolvers += "Typesafe Repository" at "http://repo.typesafe.com/typesafe/releases/"
 
+resolvers += "spray repo" at "http://repo.spray.io"
+
 libraryDependencies += "org.scalatest" %% "scalatest" % "1.9.1" % "test"
 
 libraryDependencies += "com.typesafe.akka" %% "akka-actor" % "2.1.4"

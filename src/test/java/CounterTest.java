@@ -30,7 +30,7 @@ public class CounterTest {
                 case 1: command = "SUBTRACT"; break;
                 case 2: command = "SQT"; break;
             }
-            IOUtils.write(String.format("%s %s%n", command, r.nextInt(10)), fos);
+            IOUtils.write(String.format("%s %s %s%n", command, r.nextInt(100), r.nextInt(10)), fos);
         }
         fos.close();
     }
