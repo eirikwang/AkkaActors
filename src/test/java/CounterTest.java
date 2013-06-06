@@ -23,7 +23,7 @@ public class CounterTest {
 
         FileOutputStream fos = new FileOutputStream("testinput.txt");
         Random r = new Random();
-        for (int i = 0; i < 1000000; i++) {
+        for (int i = 0; i < 10000; i++) {
             String command = "";
             switch (r.nextInt(3)){
                 case 0: command = "ADD"; break;
