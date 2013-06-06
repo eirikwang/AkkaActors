@@ -23,8 +23,14 @@ public class CounterTest {
 
         FileOutputStream fos = new FileOutputStream("testinput.txt");
         Random r = new Random();
-        for (int i = 0; i < 10000; i++) {
+        for (int i = 0; i < 100; i++) {
             String command = "";
+            if(i%15 == 0){
+                IOUtils.write(String.format("%s %s %s%n", "TIMES", r.nextInt(100), "feil"), fos);
+            }
+            if(i%10 == 0){
+                IOUtils.write(String.format("%s %s %s%n", "TIMES", r.nextInt(100), r.nextInt(10)), fos);
+            }
             switch (r.nextInt(3)){
                 case 0: command = "ADD"; break;
                 case 1: command = "SUBTRACT"; break;

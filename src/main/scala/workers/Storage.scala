@@ -5,7 +5,7 @@ object Storage {
   def put(id:String, value:Long){
     storage += id -> value
   }
-  def fetch(id:String) {
-    storage(id)
+  def fetch(id:String): Long = {
+    storage.getOrElse(id, 0)
   }
 }

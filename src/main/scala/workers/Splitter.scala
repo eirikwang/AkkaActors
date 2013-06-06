@@ -4,7 +4,7 @@ import workers.Worker.{Unknown, Sqt, Subtract, Add}
 import akka.actor.{OneForOneStrategy, Props, ActorRef, Actor}
 import workers.Splitter.Handle
 import workers.WorkerRouter.Route
-import akka.actor.SupervisorStrategy.{Escalate, Resume}
+import akka.actor.SupervisorStrategy.{Restart, Escalate, Resume}
 import scala.concurrent.duration._
 import akka.routing.SmallestMailboxRouter
 
@@ -27,7 +27,7 @@ class Splitter(router: ActorRef) extends Actor {
   override val supervisorStrategy =
     OneForOneStrategy(maxNrOfRetries = 10, withinTimeRange = 1 minute) {
       case _: NumberFormatException => {
-        Escalate
+        Restart
       }
       case _: Any => {
         Resume

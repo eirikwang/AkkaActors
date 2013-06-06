@@ -37,4 +37,13 @@ class Worker() extends Actor {
     context.actorFor("/user/cnt") ! Tick
   }
 
+  override def postStop() {
+    println("Lagrer til base")
+    Storage.put(self.path.toString, count)
+  }
+
+  override def preStart() {
+    println("Henter verdi fra base")
+    count = Storage.fetch(self.path.toString)
+  }
 }

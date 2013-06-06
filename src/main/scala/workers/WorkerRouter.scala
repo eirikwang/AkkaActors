@@ -5,7 +5,7 @@ import akka.actor._
 import workers.WorkerRouter.Route
 import workers.WorkerRouter.Route
 import scala.concurrent.duration._
-import akka.actor.SupervisorStrategy.Resume
+import akka.actor.SupervisorStrategy.{Restart, Resume}
 
 object WorkerRouter {
 
@@ -13,12 +13,14 @@ object WorkerRouter {
 
 }
 
-class WorkerRouter(accountRange:Range) extends Actor with ActorLogging{
+class WorkerRouter(accountRange:Range) extends Actor {
   override val supervisorStrategy =
     OneForOneStrategy(maxNrOfRetries = 10, withinTimeRange=1 minute){
-      case ex: RuntimeException => {
-        println("error " + ex)
+      case ex: HandleException => {
         Resume
+      }
+      case ex: UnexpectedException => {
+        Restart
       }
     }
 

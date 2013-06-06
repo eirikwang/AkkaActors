@@ -1,4 +1,4 @@
-import akka.actor.SupervisorStrategy.Resume
+import akka.actor.SupervisorStrategy.{Restart, Resume}
 import workers.Counter.Start
 import workers.{Splitter, WorkerRouter, FileReader, Worker}
 import akka.actor.{OneForOneStrategy, ActorRef, Props, ActorSystem}
@@ -12,8 +12,8 @@ class AkkaBatchRunner extends Bootable{
   val supervisorStrategy =
     OneForOneStrategy(maxNrOfRetries = 10, withinTimeRange=1 minute){
       case ex: RuntimeException => {
-        println("error " + ex)
-        Resume
+        println("Feil i topp " + ex)
+        Restart
       }
     }
 
@@ -25,7 +25,7 @@ class AkkaBatchRunner extends Bootable{
     val fileReader = system.actorOf(Props(new FileReader(splitter)), "fileReader")
 
     counter ! Start
-    fileReader ! "error.txt"
+    fileReader ! "testinput.txt"
   }
 
   def shutdown() {
